@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 · Breakpoints · starter</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      background: #e8e4d9;
+      padding: 16px;
+      color: #0a0a0a;
+    }
+    h1 {
+      font-family: "Arial Black", Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 1.35rem;
+      margin: 0 0 12px;
+    }
+    p.note {
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+      margin: 0 0 16px;
+    }
+
+    /* ========== TYP HIER ========== */
+    .zone {
+      /* background: #ff3b00; */
+      /* color: #fff; */
+      /* padding: 24px; */
+      border: 3px solid #0a0a0a;
+      font-family: "Arial Black", Arial, sans-serif;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 1.5rem;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* @media (min-width: 600px) {
+         .zone { background: #0047ff; }
+       }
+       @media (min-width: 1000px) {
+         .zone { background: #00c853; color: #000; }
+       }
+    */
+
+    /* optioneel labels via ::after */
+  </style>
+</head>
+<body>
+  <h1>03 · Kleur per zone</h1>
+  <p class="note">Versleep het venster: oranje → blauw @600 → groen @1000</p>
+  <div class="zone">Zone</div>
+</body>
+</html>

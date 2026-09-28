@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07 · clamp() · starter</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      background: #e8e4d9;
+      color: #0a0a0a;
+    }
+
+    /* ========== TYP HIER ========== */
+    .hero {
+      background: #0a0a0a;
+      color: #fff;
+      border-bottom: 5px solid #ff3b00;
+      /* padding: clamp(1rem, 5vw, 3rem); */
+      padding: 16px;
+    }
+
+    .hero h1 {
+      font-family: "Arial Black", Arial, sans-serif;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin: 0 0 8px;
+      letter-spacing: -0.03em;
+      /* font-size: clamp(1.5rem, 4vw + 1rem, 3.5rem); */
+      font-size: 1.5rem;
+    }
+
+    .hero p {
+      font-family: "Courier New", monospace;
+      opacity: 0.85;
+      margin: 0;
+      max-width: 40rem;
+    }
+
+    .hint {
+      padding: 16px;
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>Fluid type</h1>
+    <p>Vervang vaste sizes door clamp(). Versleep het venster — geen harde sprong.</p>
+  </header>
+  <p class="hint">
+    h1 → clamp(1.5rem, 4vw + 1rem, 3.5rem)<br>
+    .hero padding → clamp(1rem, 5vw, 3rem)
+  </p>
+</body>
+</html>

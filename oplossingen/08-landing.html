@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>08 · Landing · oplossing</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      background: #e8e4d9;
+      color: #0a0a0a;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #f5f1e6;
+      border-left: 3px solid #0a0a0a;
+      border-right: 3px solid #0a0a0a;
+      min-height: 100vh;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px;
+      background: #0a0a0a;
+      border-bottom: 4px solid #ff3b00;
+    }
+    .nav .logo {
+      font-family: "Arial Black", Arial, sans-serif;
+      color: #fff;
+      text-transform: uppercase;
+      margin-right: auto;
+    }
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .nav a {
+      color: #f5f1e6;
+      font-family: "Courier New", monospace;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (min-width: 800px) {
+      .nav {
+        flex-direction: row;
+        align-items: center;
+        gap: 24px;
+        padding: 16px 24px;
+      }
+      .nav-links {
+        flex-direction: row;
+        gap: 20px;
+        margin-left: auto;
+      }
+    }
+
+    .hero {
+      padding: clamp(1.25rem, 5vw, 3rem);
+      border-bottom: 3px solid #0a0a0a;
+    }
+    .hero h1 {
+      font-family: "Arial Black", Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: clamp(1.6rem, 4vw + 1rem, 3.25rem);
+      line-height: 1.05;
+      margin: 0 0 12px;
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      font-family: "Courier New", monospace;
+      max-width: 40rem;
+      margin: 0 0 16px;
+    }
+    .btn {
+      display: inline-block;
+      border: 3px solid #0a0a0a;
+      background: #ff3b00;
+      color: #fff;
+      font-family: "Courier New", monospace;
+      font-weight: bold;
+      padding: 10px 16px;
+      text-decoration: none;
+      box-shadow: 3px 3px 0 #0a0a0a;
+      text-transform: uppercase;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding: clamp(1rem, 3vw, 1.5rem);
+    }
+    .projects article {
+      border: 3px solid #0a0a0a;
+      padding: 16px;
+      background: #fff;
+      box-shadow: 3px 3px 0 #0a0a0a;
+    }
+    .projects h2 {
+      font-family: "Arial Black", Arial, sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    .projects p {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    footer {
+      padding: 16px 24px;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      border-top: 3px solid #0a0a0a;
+      background: #0a0a0a;
+      color: #f5f1e6;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="logo">Pixel Forge</div>
+      <div class="nav-links">
+        <a href="#">Werk</a>
+        <a href="#">Over</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>We bouwen voor elk scherm</h1>
+      <p>
+        Viewport · fluïde page · clamp-titel · auto-fit projecten · mobile-first nav.
+      </p>
+      <a class="btn" href="#">Bekijk werk</a>
+    </header>
+
+    <section class="projects">
+      <article>
+        <h2>Project Alpha</h2>
+        <p>Mobile-first redesign voor een cultuurhuis.</p>
+      </article>
+      <article>
+        <h2>Project Beta</h2>
+        <p>Design system met fluïde type en tokens.</p>
+      </article>
+      <article>
+        <h2>Project Gamma</h2>
+        <p>Webshop-layout met auto-fit productgrid.</p>
+      </article>
+    </section>
+
+    <footer>08 · Challenge · 6 Crossmedia · Steven Vandersmissen</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <!-- DEMO: haal de commentaar weg om viewport AAN te zetten
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  -->
+  <title>01 · Viewport demo</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      background: #e8e4d9;
+      color: #0a0a0a;
+    }
+    .bar {
+      background: #0a0a0a;
+      color: #f5f1e6;
+      padding: 12px 16px;
+      font-family: "Courier New", monospace;
+      font-size: 14px;
+      border-bottom: 4px solid #ff3b00;
+    }
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+    h1 {
+      font-family: "Arial Black", Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 2rem;
+      margin: 0 0 12px;
+    }
+    .card {
+      background: #f5f1e6;
+      border: 3px solid #0a0a0a;
+      padding: 16px;
+      box-shadow: 4px 4px 0 #0a0a0a;
+      margin-bottom: 16px;
+    }
+    .card strong {
+      display: block;
+      font-family: "Courier New", monospace;
+      color: #ff3b00;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    .grid {
+      display: flex;
+      gap: 12px;
+    }
+    .grid div {
+      flex: 1;
+      background: #0047ff;
+      color: #fff;
+      padding: 20px;
+      border: 3px solid #0a0a0a;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="bar">01 · Viewport demo · zet device-mode op ~320px</div>
+  <div class="wrap">
+    <h1>Zonder viewport?</h1>
+    <div class="card">
+      <strong>Kijk naar de schaal</strong>
+      Op een telefoon zonder viewport-meta zoomt de browser uit.
+      Zet de meta-tag aan en refresh — het verschil is meteen zichtbaar.
+    </div>
+    <div class="grid">
+      <div>A</div>
+      <div>B</div>
+      <div>C</div>
+    </div>
+  </div>
+</body>
+</html>

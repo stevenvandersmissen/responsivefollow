@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Follow-along oefeningen · Responsive Design · 6 CM</title>
+  <meta name="author" content="Steven Vandersmissen" />
+  <style>
+    :root {
+      --bg: #e8e4d9;
+      --bg-alt: #d4cfc0;
+      --ink: #0a0a0a;
+      --paper: #f5f1e6;
+      --accent: #ff3b00;
+      --blue: #0047ff;
+      --green: #00c853;
+      --warn: #ffb300;
+      --mono: "Courier New", Courier, monospace;
+      --sans: "Arial Black", "Arial Bold", Arial, sans-serif;
+      --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink); color: var(--paper);
+      border-bottom: 5px solid var(--accent);
+      padding: 0.85rem 1.5rem;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;
+    }
+    .topbar h1 {
+      font-family: var(--sans);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .topbar h1 span { color: var(--accent); }
+    .topbar .meta { font-family: var(--mono); font-size: 0.75rem; opacity: 0.85; }
+    .topbar .meta strong { color: var(--accent); }
+
+    .wrap { max-width: 980px; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+
+    .hero {
+      border: 5px solid var(--ink);
+      background: var(--paper);
+      box-shadow: 6px 6px 0 var(--ink);
+      margin-bottom: 1.75rem;
+    }
+    .hero-stripe {
+      height: 10px;
+      background: repeating-linear-gradient(90deg, var(--accent) 0 18px, var(--ink) 18px 36px, var(--blue) 36px 54px, var(--warn) 54px 72px);
+    }
+    .hero-body { padding: 1.5rem 1.75rem; }
+    .hero h2 {
+      font-family: var(--sans);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.6rem;
+    }
+    .hero h2 span { color: var(--accent); }
+    .hero p { font-family: var(--mono); font-size: 0.92rem; max-width: 40rem; margin-bottom: 1rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      border: 2px solid var(--ink);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      padding: 0.25rem 0.55rem;
+      background: var(--bg);
+    }
+    .chip.hot { background: var(--accent); color: #fff; }
+    .chip.blue { background: var(--blue); color: #fff; }
+    .chip.green { background: var(--green); color: #fff; }
+
+    .howto {
+      border: 3px solid var(--ink);
+      background: var(--paper);
+      box-shadow: 3px 3px 0 var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .howto-h {
+      background: var(--blue); color: #fff;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 1rem;
+      border-bottom: 3px solid var(--ink);
+    }
+    .howto-b { padding: 1rem 1.15rem; }
+    .howto-b ol { margin-left: 1.25rem; }
+    .howto-b li { margin-bottom: 0.35rem; }
+
+    .toc {
+      border: 3px solid var(--ink);
+      background: var(--paper);
+      margin-bottom: 2rem;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .toc-h {
+      background: var(--ink); color: var(--paper);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border-bottom: 3px solid var(--accent);
+    }
+    .toc-b { padding: 0.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.5rem; }
+    .toc a {
+      display: block;
+      text-decoration: none;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      padding: 0.65rem 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      background: var(--bg);
+      transition: transform 0.08s, box-shadow 0.08s;
+    }
+    .toc a:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0 var(--ink);
+      background: #fff;
+    }
+    .toc a .n { color: var(--accent); font-weight: 700; display: block; font-size: 0.65rem; margin-bottom: 0.2rem; }
+    .toc a .t { font-family: var(--sans); text-transform: uppercase; font-size: 0.85rem; line-height: 1.15; }
+
+    .ex {
+      border: 5px solid var(--ink);
+      background: var(--paper);
+      box-shadow: 6px 6px 0 var(--ink);
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 5rem;
+    }
+    .ex-head {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1.1rem 1.25rem;
+      border-bottom: 5px solid var(--accent);
+      position: relative;
+    }
+    .ex-kicker {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+    }
+    .ex-head h3 {
+      font-family: var(--sans);
+      font-size: clamp(1.2rem, 3vw, 1.7rem);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .ex-meta {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 0.65rem;
+    }
+    .pill {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      border: 2px solid #fff;
+      padding: 0.15rem 0.45rem;
+      text-transform: uppercase;
+    }
+    .pill.time { background: var(--warn); color: var(--ink); border-color: var(--ink); }
+    .pill.level { background: var(--blue); color: #fff; }
+    .pill.mode { background: var(--accent); color: #fff; }
+
+    .ex-body { padding: 1.15rem 1.25rem 1.4rem; }
+
+    .goal {
+      border: 2px dashed var(--ink);
+      background: var(--bg-alt);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .goal strong {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .block {
+      border: 3px solid var(--ink);
+      margin-bottom: 1rem;
+      background: #fff;
+    }
+    .block-h {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0.85rem;
+      border-bottom: 3px solid var(--ink);
+      display: flex; align-items: center; gap: 0.45rem;
+    }
+    .block-h .ic {
+      display: inline-flex; width: 1.25rem; height: 1.25rem;
+      align-items: center; justify-content: center;
+      background: var(--accent); color: #fff;
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 700;
+    }
+    .block-h.demo .ic { background: var(--blue); }
+    .block-h.steps .ic { background: var(--warn); color: var(--ink); }
+    .block-h.code .ic { background: var(--green); color: #fff; }
+    .block-h.extra .ic { background: var(--accent); }
+    .block-h.say .ic { background: #9c27b0; }
+    .block-b { padding: 0.9rem 1rem; }
+
+    .steps { list-style: none; counter-reset: step; }
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding: 0.65rem 0.65rem 0.65rem 2.6rem;
+      border-bottom: 1.5px solid #ccc;
+      font-size: 0.95rem;
+    }
+    .steps li:last-child { border-bottom: none; }
+    .steps li::before {
+      content: counter(step, decimal-leading-zero);
+      position: absolute; left: 0.4rem; top: 0.65rem;
+      font-family: var(--mono); font-weight: 700; font-size: 0.8rem;
+      background: var(--accent); color: #fff;
+      border: 2px solid var(--ink);
+      width: 1.7rem; height: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    kbd {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.88em;
+      background: #ffe566;
+      border: 2px solid var(--ink);
+      border-bottom-width: 3px;
+      padding: 0.05rem 0.35rem;
+      box-shadow: 2px 2px 0 var(--ink);
+      white-space: nowrap;
+    }
+    code {
+      font-family: var(--mono);
+      background: var(--bg-alt);
+      border: 1.5px solid var(--ink);
+      padding: 0.05rem 0.3rem;
+      font-size: 0.88em;
+    }
+
+    pre {
+      background: #1a1a1a;
+      color: #e8e4d9;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+      border-top: 2px solid #333;
+      white-space: pre;
+    }
+    .code-label {
+      background: #000;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.75rem;
+      display: flex; justify-content: space-between;
+    }
+
+    .say {
+      border-left: 8px solid #9c27b0;
+      background: #f3e5f5;
+      padding: 0.75rem 1rem;
+      font-size: 0.92rem;
+      margin: 0.5rem 0;
+    }
+    .say strong {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 0.25rem;
+      color: #6a1b9a;
+    }
+
+    .callout {
+      border: 3px solid var(--ink);
+      border-left-width: 8px;
+      padding: 0.75rem 1rem;
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+    .callout.warn { border-left-color: var(--warn); background: #fff8e1; }
+    .callout.info { border-left-color: var(--blue); background: #e8f0ff; }
+    .callout.ok { border-left-color: var(--green); background: #e8f8ee; }
+    .callout.hot { border-left-color: var(--accent); background: #ffe8e0; }
+    .callout-t {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .files {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .files a {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+      color: var(--ink);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.45rem 0.75rem;
+      box-shadow: 2px 2px 0 var(--ink);
+      text-transform: uppercase;
+    }
+    .files a:hover { background: var(--accent); color: #fff; }
+    .files a.sol { background: var(--green); color: #fff; }
+    .files a.sol:hover { background: var(--ink); }
+
+    .nav-ex {
+      display: flex; justify-content: space-between; gap: 0.75rem;
+      margin-top: 1rem; padding-top: 0.85rem;
+      border-top: 3px solid var(--ink);
+    }
+    .nav-ex a {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      border: 2px solid var(--ink);
+      padding: 0.4rem 0.7rem;
+      background: var(--bg);
+    }
+    .nav-ex a:hover { background: var(--ink); color: var(--paper); }
+
+    footer {
+      border-top: 5px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1.25rem 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-align: center;
+    }
+    footer strong { color: var(--accent); }
+
+    @media print {
+      .topbar { position: static; }
+      .ex { break-inside: avoid; box-shadow: none; }
+      .files a[href]::after { content: " (" attr(href) ")"; font-size: 0.65rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <h1>&lt;RWD&gt; <span>Follow-along</span> · 6 CM</h1>
+    <div class="meta">Auteur: <strong>Steven Vandersmissen</strong> · Demo + meeschrijven</div>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-stripe"></div>
+      <div class="hero-body">
+        <h2>Demo &amp; <span>follow-along</span></h2>
+        <p>
+          Acht oefeningen om <strong>live te projecteren</strong> en samen te typen.
+          Elke oefening: doel · wat jij zegt · stappen · starter · oplossing · stretch.
+        </p>
+        <div class="chips">
+          <span class="chip hot">Live demo</span>
+          <span class="chip blue">Follow-along</span>
+          <span class="chip green">Starter + oplossing</span>
+          <span class="chip">~5–12 min / stuk</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="howto">
+      <div class="howto-h">Hoe gebruik je dit in de les?</div>
+      <div class="howto-b">
+        <ol>
+          <li><strong>Projecteer</strong> deze pagina (of één starter-HTML in de editor).</li>
+          <li>Leerlingen openen het bijbehorende bestand in <code>starters/</code> (Live Server).</li>
+          <li>Jij doet de stappen hardop; zij typen mee. Pauzeer na elke stap.</li>
+          <li>Toon kort het verschil in DevTools device-mode (320 / 768 / 1200).</li>
+          <li>Stretch = snelle leerlingen of huiswerk. Oplossingen staan in <code>oplossingen/</code>.</li>
+        </ol>
+        <div class="callout info" style="margin-top:0.75rem">
+          <div class="callout-t">Tip</div>
+          Geel (<kbd>zo</kbd>) = exacte waarden om over te nemen. Laat leerlingen eerst zelf nadenken vóór je de code toont.
+        </div>
+      </div>
+    </div>
+
+    <nav class="toc" aria-label="Inhoud oefeningen">
+      <div class="toc-h">Overzicht oefeningen</div>
+      <div class="toc-b">
+        <a href="#ex01"><span class="n">01 · 5 min · demo</span><span class="t">Viewport aan/uit</span></a>
+        <a href="#ex02"><span class="n">02 · 8 min · follow</span><span class="t">Mobile-first stack</span></a>
+        <a href="#ex03"><span class="n">03 · 8 min · follow</span><span class="t">Breakpoints kleuren</span></a>
+        <a href="#ex04"><span class="n">04 · 10 min · follow</span><span class="t">Flex wrap cards</span></a>
+        <a href="#ex05"><span class="n">05 · 10 min · follow</span><span class="t">Grid auto-fit</span></a>
+        <a href="#ex06"><span class="n">06 · 12 min · follow</span><span class="t">Hamburger-nav</span></a>
+        <a href="#ex07"><span class="n">07 · 8 min · follow</span><span class="t">clamp() titel</span></a>
+        <a href="#ex08"><span class="n">08 · 12 min · challenge</span><span class="t">Mini landing page</span></a>
+      </div>
+    </nav>
+
+    <!-- ===================== EX 01 ===================== -->
+    <article class="ex" id="ex01">
+      <div class="ex-head">
+        <div class="ex-kicker">Oefening 01 · Fundamentals</div>
+        <h3>Viewport aan / uit</h3>
+        <div class="ex-meta">
+          <span class="pill time">± 5 min</span>
+          <span class="pill mode">Demo (jij typt)</span>
+          <span class="pill level">Instap</span>
+        </div>
+      </div>
+      <div class="ex-body">
+        <div class="goal">
+          <strong>Doel</strong>
+          Leerlingen zien met eigen ogen waarom <code>&lt;meta name="viewport"&gt;</code> verplicht is op mobile.
+        </div>
+
+        <div class="block">
+          <div class="block-h say"><span class="ic">💬</span> Zeg dit</div>
+          <div class="block-b">
+            <div class="say">
+              <strong>Script</strong>
+              “Mobiele browsers doen alsof ze ~980px breed zijn en zoomen uit — tenzij wij dat afzetten.
+              Ik toon nu hetzelfde bestand mét en zonder viewport-meta.”
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h steps"><span class="ic">S</span> Stappen (live)</div>
+          <div class="block-b">
+            <ol class="steps">
+              <li>Open <code>starters/01-viewport.html</code> in de browser + DevTools → device toolbar → iPhone / 320px.</li>
+              <li>Toon: tekst is piepklein, layout “desktop-achtig ingezoomd”.</li>
+              <li>Haal de commentaar-strepen weg rond de viewport-meta (of plak hem erin).</li>
+              <li>Refresh: layout volgt device-width. <kbd>width=device-width</kbd>, <kbd>initial-scale=1.0</kbd>.</li>
+              <li>Vraag de klas: “Wat zou er gebeuren als we <code>maximum-scale=1</code> zetten?” → a11y-discussie (liever niet).</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h code"><span class="ic">{ }</span> Kerncode</div>
+          <div class="block-b" style="padding:0">
+            <div class="code-label"><span>in &lt;head&gt;</span><span>exact</span></div>
+            <pre>&lt;meta name="viewport"
+      content="width=device-width, initial-scale=1.0"&gt;</pre>
+          </div>
+        </div>
+
+        <div class="files">
+          <a href="starters/01-viewport.html">📄 Starter</a>
+          <a class="sol" href="oplossingen/01-viewport.html">✓ Oplossing</a>
+        </div>
+        <div class="nav-ex">
+          <a href="#ex01">·</a>
+          <a href="#ex02">Volgende → 02</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===================== EX 02 ===================== -->
+    <article class="ex" id="ex02">
+      <div class="ex-head">
+        <div class="ex-kicker">Oefening 02 · Mobile-first</div>
+        <h3>Stack → rij</h3>
+        <div class="ex-meta">
+          <span class="pill time">± 8 min</span>
+          <span class="pill mode">Follow-along</span>
+          <span class="pill level">Basis</span>
+        </div>
+      </div>
+      <div class="ex-body">
+        <div class="goal">
+          <strong>Doel</strong>
+          Mobile-first patroon: basis = kolom, vanaf breakpoint = rij met <code>min-width</code>.
+        </div>
+
+        <div class="block">
+          <div class="block-h say"><span class="ic">💬</span> Zeg dit</div>
+          <div class="block-b">
+            <div class="say">
+              <strong>Script</strong>
+              “We schrijven eerst voor de smalste layout. Grotere schermen krijgen extra regels — niet andersom.
+              Dat is mobile-first.”
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h steps"><span class="ic">S</span> Stappen (samen typen)</div>
+          <div class="block-b">
+            <ol class="steps">
+              <li>Open <code>starters/02-mobile-first.html</code>. Drie boxes staan al in de HTML.</li>
+              <li>Op <code>.row</code>: <code>display: flex</code>, <code>flex-direction: column</code>, <code>gap: 12px</code>.</li>
+              <li>Voeg toe: <code>@media (min-width: 700px)</code>.</li>
+              <li>Daarin: <code>.row { flex-direction: row; }</code> en <code>.row &gt; * { flex: 1; }</code>.</li>
+              <li>Test: versmal/verbreed het venster of gebruik device-mode.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h code"><span class="ic">{ }</span> Doel-CSS</div>
+          <div class="block-b" style="padding:0">
+            <div class="code-label"><span>CSS</span></div>
+            <pre>.row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 700px) {
+  .row { flex-direction: row; }
+  .row > * { flex: 1; }
+}</pre>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h extra"><span class="ic">+</span> Stretch</div>
+          <div class="block-b">
+            Vanaf <kbd>1000px</kbd>: <code>gap: 24px</code> en een lichtere achtergrond op de cards.
+          </div>
+        </div>
+
+        <div class="files">
+          <a href="starters/02-mobile-first.html">📄 Starter</a>
+          <a class="sol" href="oplossingen/02-mobile-first.html">✓ Oplossing</a>
+        </div>
+        <div class="nav-ex">
+          <a href="#ex01">← 01</a>
+          <a href="#ex03">Volgende → 03</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===================== EX 03 ===================== -->
+    <article class="ex" id="ex03">
+      <div class="ex-head">
+        <div class="ex-kicker">Oefening 03 · Breakpoints</div>
+        <h3>Kleur per zone</h3>
+        <div class="ex-meta">
+          <span class="pill time">± 8 min</span>
+          <span class="pill mode">Follow-along</span>
+          <span class="pill level">Basis</span>
+        </div>
+      </div>
+      <div class="ex-body">
+        <div class="goal">
+          <strong>Doel</strong>
+          Drie <code>min-width</code>-zones zichtbaar maken. Breakpoints “voelen”, niet uit het hoofd leren.
+        </div>
+
+        <div class="block">
+          <div class="block-h say"><span class="ic">💬</span> Zeg dit</div>
+          <div class="block-b">
+            <div class="say">
+              <strong>Script</strong>
+              “Een breakpoint is geen magisch getal van Apple — het is de breedte waar jóuw layout breekt.
+              Wij forceren nu drie zones met kleur zodat je de sprong ziet.”
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h steps"><span class="ic">S</span> Stappen</div>
+          <div class="block-b">
+            <ol class="steps">
+              <li>Open <code>starters/03-breakpoints.html</code>.</li>
+              <li>Basis <code>.zone</code>: achtergrond <kbd>#ff3b00</kbd>, tekst wit, padding <kbd>24px</kbd>.</li>
+              <li>Vanaf <kbd>min-width: 600px</kbd>: achtergrond <kbd>#0047ff</kbd>.</li>
+              <li>Vanaf <kbd>min-width: 1000px</kbd>: achtergrond <kbd>#00c853</kbd>, tekst zwart.</li>
+              <li>Optioneel: met <code>::after</code> de labeltekst wijzigen (phone / tablet / desktop).</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h extra"><span class="ic">+</span> Klassikale vraag</div>
+          <div class="block-b">
+            “Waarom <code>min-width</code> en niet <code>max-width</code> als we mobile-first werken?”
+            <div class="callout ok" style="margin-top:0.5rem">
+              <div class="callout-t">Antwoord</div>
+              Basis = kleinste scherm. Je <em>voegt toe</em> naarmate er meer ruimte is.
+            </div>
+          </div>
+        </div>
+
+        <div class="files">
+          <a href="starters/03-breakpoints.html">📄 Starter</a>
+          <a class="sol" href="oplossingen/03-breakpoints.html">✓ Oplossing</a>
+        </div>
+        <div class="nav-ex">
+          <a href="#ex02">← 02</a>
+          <a href="#ex04">Volgende → 04</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===================== EX 04 ===================== -->
+    <article class="ex" id="ex04">
+      <div class="ex-head">
+        <div class="ex-kicker">Oefening 04 · Flexbox</div>
+        <h3>Cards die wrappen</h3>
+        <div class="ex-meta">
+          <span class="pill time">± 10 min</span>
+          <span class="pill mode">Follow-along</span>
+          <span class="pill level">Midden</span>
+        </div>
+      </div>
+      <div class="ex-body">
+        <div class="goal">
+          <strong>Doel</strong>
+          Het patroon <code>flex-wrap</code> + <code>flex: 1 1 …px</code> — responsive cards zonder media query.
+        </div>
+
+        <div class="block">
+          <div class="block-h say"><span class="ic">💬</span> Zeg dit</div>
+          <div class="block-b">
+            <div class="say">
+              <strong>Script</strong>
+              “Soms heb je geen breakpoint nodig. Flex kan zelf beslissen hoeveel kaarten naast elkaar passen.
+              <code>flex: 1 1 180px</code> betekent: basis ~180px, daarna groeien en krimpen.”
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h steps"><span class="ic">S</span> Stappen</div>
+          <div class="block-b">
+            <ol class="steps">
+              <li>Open <code>starters/04-flex-cards.html</code> (6 cards staan klaar).</li>
+              <li><code>.cards</code>: <code>display: flex</code>, <code>flex-wrap: wrap</code>, <code>gap: 12px</code>.</li>
+              <li><code>.card</code>: <code>flex: 1 1 180px</code>, padding, border, achtergrond.</li>
+              <li>Versmal het venster: 1 → 2 → 3 kolommen vanzelf.</li>
+              <li>Experiment: verander <kbd>180px</kbd> naar <kbd>240px</kbd> — minder kolommen.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h code"><span class="ic">{ }</span> Kern</div>
+          <div class="block-b" style="padding:0">
+            <div class="code-label"><span>CSS</span></div>
+            <pre>.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.card {
+  flex: 1 1 180px;
+}</pre>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h extra"><span class="ic">+</span> Stretch</div>
+          <div class="block-b">
+            Voeg <code>min-height: 100px</code> toe en centreer de tekst met flex op de card zelf
+            (<code>display:flex; align-items:center; justify-content:center</code>).
+          </div>
+        </div>
+
+        <div class="files">
+          <a href="starters/04-flex-cards.html">📄 Starter</a>
+          <a class="sol" href="oplossingen/04-flex-cards.html">✓ Oplossing</a>
+        </div>
+        <div class="nav-ex">
+          <a href="#ex03">← 03</a>
+          <a href="#ex05">Volgende → 05</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===================== EX 05 ===================== -->
+    <article class="ex" id="ex05">
+      <div class="ex-head">
+        <div class="ex-kicker">Oefening 05 · CSS Grid</div>
+        <h3>auto-fit + minmax</h3>
+        <div class="ex-meta">
+          <span class="pill time">± 10 min</span>
+          <span class="pill mode">Follow-along</span>
+          <span class="pill level">Midden</span>
+        </div>
+      </div>
+      <div class="ex-body">
+        <div class="goal">
+          <strong>Doel</strong>
+          Het “holy grail”-grid: <code>repeat(auto-fit, minmax(…, 1fr))</code> — responsive zonder MQ.
+        </div>
+
+        <div class="block">
+          <div class="block-h say"><span class="ic">💬</span> Zeg dit</div>
+          <div class="block-b">
+            <div class="say">
+              <strong>Script</strong>
+              “Grid is 2D. Met auto-fit en minmax zeg je: zoveel kolommen als er passen, elk minstens X pixels,
+              en ze delen de rest gelijkelijk. Eén regel. Geen media query.”
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h steps"><span class="ic">S</span> Stappen</div>
+          <div class="block-b">
+            <ol class="steps">
+              <li>Open <code>starters/05-grid-autofit.html</code>.</li>
+              <li><code>.grid</code>: <code>display: grid</code>.</li>
+              <li><code>grid-template-columns: repeat(auto-fit, minmax(160px, 1fr))</code>.</li>
+              <li><code>gap: 16px</code>.</li>
+              <li>Vergelijk met oefening 04: zelfde effect, andere tool. Wanneer grid vs flex?</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-t">Discussie (2 min)</div>
+          Flex = 1 richting (rij of kolom). Grid = rijen én kolommen tegelijk. Cards in een gallery: beide kunnen — grid blinkt uit bij echte 2D.
+        </div>
+
+        <div class="files">
+          <a href="starters/05-grid-autofit.html">📄 Starter</a>
+          <a class="sol" href="oplossingen/05-grid-autofit.html">✓ Oplossing</a>
+        </div>
+        <div class="nav-ex">
+          <a href="#ex04">← 04</a>
+          <a href="#ex06">Volgende → 06</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===================== EX 06 ===================== -->
+    <article class="ex" id="ex06">
+      <div class="ex-head">
+        <div class="ex-kicker">Oefening 06 · Navigatie</div>
+        <h3>Hamburger → horizontale nav</h3>
+        <div class="ex-meta">
+          <span class="pill time">± 12 min</span>
+          <span class="pill mode">Follow-along</span>
+          <span class="pill level">Midden+</span>
+        </div>
+      </div>
+      <div class="ex-body">
+        <div class="goal">
+          <strong>Doel</strong>
+          Klassiek responsive-nav patroon: toggle op mobile, horizontale links vanaf tablet.
+        </div>
+
+        <div class="block">
+          <div class="block-h say"><span class="ic">💬</span> Zeg dit</div>
+          <div class="block-b">
+            <div class="say">
+              <strong>Script</strong>
+              “HTML eerst: knop + nav. CSS: op mobile verbergen we de links tot .open. Vanaf 800px tonen we altijd een rij
+              en verbergen we de knop. Mini-JS voor de toggle — later netter met aria-expanded.”
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h steps"><span class="ic">S</span> Stappen</div>
+          <div class="block-b">
+            <ol class="steps">
+              <li>Open <code>starters/06-nav.html</code> — structuur staat er al.</li>
+              <li>Mobile: <code>.links { display: none; }</code> en <code>.links.open { display: flex; flex-direction: column; }</code>.</li>
+              <li>JS: knop togglet class <code>open</code> op <code>.links</code>.</li>
+              <li>MQ <kbd>min-width: 800px</kbd>: knop <code>display: none</code>, links altijd <code>display: flex; flex-direction: row</code>.</li>
+              <li>Test beide breedtes. Bonus: <code>aria-expanded</code> op de knop zetten.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-t">Let op</div>
+          Nav nooit “weggooien” zonder alternatief. Keyboard- en screenreader-gebruikers moeten erbij kunnen.
+        </div>
+
+        <div class="files">
+          <a href="starters/06-nav.html">📄 Starter</a>
+          <a class="sol" href="oplossingen/06-nav.html">✓ Oplossing</a>
+        </div>
+        <div class="nav-ex">
+          <a href="#ex05">← 05</a>
+          <a href="#ex07">Volgende → 07</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===================== EX 07 ===================== -->
+    <article class="ex" id="ex07">
+      <div class="ex-head">
+        <div class="ex-kicker">Oefening 07 · Modern CSS</div>
+        <h3>Fluïde titel met clamp()</h3>
+        <div class="ex-meta">
+          <span class="pill time">± 8 min</span>
+          <span class="pill mode">Follow-along</span>
+          <span class="pill level">Midden</span>
+        </div>
+      </div>
+      <div class="ex-body">
+        <div class="goal">
+          <strong>Doel</strong>
+          <code>clamp(min, preferred, max)</code> toepassen zodat type vloeiend schaalt zonder harde MQ-sprong.
+        </div>
+
+        <div class="block">
+          <div class="block-h say"><span class="ic">💬</span> Zeg dit</div>
+          <div class="block-b">
+            <div class="say">
+              <strong>Script</strong>
+              “Drie waarden: nooit kleiner dan min, nooit groter dan max, daartussen een formule met vw.
+              Ideaal voor hero-titels. Body-tekst blijf je eerder in rem houden.”
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h steps"><span class="ic">S</span> Stappen</div>
+          <div class="block-b">
+            <ol class="steps">
+              <li>Open <code>starters/07-clamp.html</code>.</li>
+              <li>Op <code>h1</code>: <code>font-size: clamp(1.5rem, 4vw + 1rem, 3.5rem)</code>.</li>
+              <li>Op <code>.hero</code>: <code>padding: clamp(1rem, 5vw, 3rem)</code>.</li>
+              <li>Versleep het venster — vloeiende schaal, geen sprong.</li>
+              <li>Vergelijk met een oude MQ-aanpak (optioneel kort tonen).</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h code"><span class="ic">{ }</span> Kern</div>
+          <div class="block-b" style="padding:0">
+            <div class="code-label"><span>CSS</span></div>
+            <pre>h1 {
+  font-size: clamp(1.5rem, 4vw + 1rem, 3.5rem);
+}
+.hero {
+  padding: clamp(1rem, 5vw, 3rem);
+}</pre>
+          </div>
+        </div>
+
+        <div class="files">
+          <a href="starters/07-clamp.html">📄 Starter</a>
+          <a class="sol" href="oplossingen/07-clamp.html">✓ Oplossing</a>
+        </div>
+        <div class="nav-ex">
+          <a href="#ex06">← 06</a>
+          <a href="#ex08">Volgende → 08</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===================== EX 08 ===================== -->
+    <article class="ex" id="ex08">
+      <div class="ex-head">
+        <div class="ex-kicker">Oefening 08 · Challenge</div>
+        <h3>Mini landing page</h3>
+        <div class="ex-meta">
+          <span class="pill time">± 12–20 min</span>
+          <span class="pill mode">Challenge / duo</span>
+          <span class="pill level">Integratie</span>
+        </div>
+      </div>
+      <div class="ex-body">
+        <div class="goal">
+          <strong>Doel</strong>
+          Alles combineren: viewport, mobile-first nav/hero, fluïde type, responsive grid met projecten.
+        </div>
+
+        <div class="block">
+          <div class="block-h say"><span class="ic">💬</span> Zeg dit</div>
+          <div class="block-b">
+            <div class="say">
+              <strong>Script</strong>
+              “Dit is jullie integratie-oefening. Starter heeft HTML-skelet en lelijke vaste CSS.
+              Jullie maken hem responsive. Checklist op het bord — 12 minuten, daarna 2 duo’s showen.”
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-h steps"><span class="ic">S</span> Must-have checklist</div>
+          <div class="block-b">
+            <ol class="steps">
+              <li>Viewport-meta staat correct.</li>
+              <li>Geen vaste <code>width: 1100px</code> meer — wel <code>width: 100%</code> + <code>max-width</code>.</li>
+              <li>Hero-titel met <code>clamp()</code>.</li>
+              <li>Projecten in grid of flex-wrap (auto-fit of flex 1 1 …).</li>
+              <li>Nav: stacked op mobile, rij vanaf ~800px (toggle mag, is bonus).</li>
+              <li>Geen horizontale scrollbar op 320px.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="callout hot">
+          <div class="callout-t">Review-rondje</div>
+          2 min per duo op projector: “Wat was jullie breakpoint-keuze en waarom?”
+        </div>
+
+        <div class="files">
+          <a href="starters/08-landing.html">📄 Starter (broken)</a>
+          <a class="sol" href="oplossingen/08-landing.html">✓ Voorbeeld-oplossing</a>
+        </div>
+        <div class="nav-ex">
+          <a href="#ex07">← 07</a>
+          <a href="#ex01">Terug naar 01</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Teacher quick card -->
+    <div class="howto">
+      <div class="howto-h">Snel lesplan (45–50 min)</div>
+      <div class="howto-b">
+        <ol>
+          <li><strong>5 min</strong> — Ex 01 viewport demo (wow-moment)</li>
+          <li><strong>8 min</strong> — Ex 02 of 03 follow-along</li>
+          <li><strong>10 min</strong> — Ex 04 of 05 (flex of grid)</li>
+          <li><strong>12 min</strong> — Ex 06 nav of Ex 07 clamp</li>
+          <li><strong>12–15 min</strong> — Ex 08 challenge + 2× show &amp; tell</li>
+        </ol>
+        <p style="margin-top:0.75rem;font-family:var(--mono);font-size:0.85rem;">
+          Te weinig tijd? Skip 06 of 07. Te veel tijd? Stretch-taken + container queries uit de hoofdcursus.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Follow-along oefeningen · Responsive Design · <strong>Steven Vandersmissen</strong> · 6 Crossmedia
+  </footer>
+</body>
+</html>

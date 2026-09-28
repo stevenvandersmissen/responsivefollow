@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <!-- TODO: viewport-meta toevoegen -->
+  <title>08 · Landing · starter (broken)</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      background: #e8e4d9;
+      color: #0a0a0a;
+    }
+
+    /* BROKEN: vaste breedte — fix dit */
+    .page {
+      width: 1100px;
+      margin: 0 auto;
+      background: #f5f1e6;
+      border-left: 3px solid #0a0a0a;
+      border-right: 3px solid #0a0a0a;
+      min-height: 100vh;
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+      padding: 16px 24px;
+      background: #0a0a0a;
+      border-bottom: 4px solid #ff3b00;
+    }
+    .nav .logo {
+      font-family: "Arial Black", Arial, sans-serif;
+      color: #fff;
+      text-transform: uppercase;
+      margin-right: auto;
+    }
+    .nav a {
+      color: #f5f1e6;
+      font-family: "Courier New", monospace;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 48px 24px;
+      border-bottom: 3px solid #0a0a0a;
+    }
+    .hero h1 {
+      font-family: "Arial Black", Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 48px; /* TODO: clamp() */
+      line-height: 1.05;
+      margin: 0 0 12px;
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      font-family: "Courier New", monospace;
+      max-width: 40rem;
+      margin: 0 0 16px;
+    }
+    .btn {
+      display: inline-block;
+      border: 3px solid #0a0a0a;
+      background: #ff3b00;
+      color: #fff;
+      font-family: "Courier New", monospace;
+      font-weight: bold;
+      padding: 10px 16px;
+      text-decoration: none;
+      box-shadow: 3px 3px 0 #0a0a0a;
+      text-transform: uppercase;
+    }
+
+    /* BROKEN: 3 vaste kolommen — maak responsive (grid of flex-wrap) */
+    .projects {
+      display: flex;
+      gap: 16px;
+      padding: 24px;
+    }
+    .projects article {
+      width: 340px;
+      border: 3px solid #0a0a0a;
+      padding: 16px;
+      background: #fff;
+      box-shadow: 3px 3px 0 #0a0a0a;
+    }
+    .projects h2 {
+      font-family: "Arial Black", Arial, sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    .projects p {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    footer {
+      padding: 16px 24px;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      border-top: 3px solid #0a0a0a;
+      background: #0a0a0a;
+      color: #f5f1e6;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="logo">Pixel Forge</div>
+      <a href="#">Werk</a>
+      <a href="#">Over</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <header class="hero">
+      <h1>We bouwen voor elk scherm</h1>
+      <p>
+        Starter is expres “kapot” op mobile. Maak hem responsive:
+        viewport, fluïde page, clamp-titel, wrap/grid projecten, braafbare nav.
+      </p>
+      <a class="btn" href="#">Bekijk werk</a>
+    </header>
+
+    <section class="projects">
+      <article>
+        <h2>Project Alpha</h2>
+        <p>Mobile-first redesign voor een cultuurhuis.</p>
+      </article>
+      <article>
+        <h2>Project Beta</h2>
+        <p>Design system met fluïde type en tokens.</p>
+      </article>
+      <article>
+        <h2>Project Gamma</h2>
+        <p>Webshop-layout met auto-fit productgrid.</p>
+      </article>
+    </section>
+
+    <footer>08 · Challenge · 6 Crossmedia · Steven Vandersmissen</footer>
+  </div>
+</body>
+</html>
